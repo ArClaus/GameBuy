@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GameBuy</title>
+</head>
+<body>
+<h1>Продавцы</h1>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Имя</th>
+        <th scope="col">Телефон</th>
+        <th scope="col">Игры</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="vendor : ${vendorsList}">
+        <td data-th-text="${vendor.name}"></td>
+        <td data-th-text="${vendor.phoneNumber}"></td>
+        <td>
+            <a data-th-href="@{'/vendors/vendor'+${vendor.id}+'/products'}">Игры</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<button onclick="location.href='/'">Назад</button>
+</body>
+</html>

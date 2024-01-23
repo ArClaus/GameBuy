@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GameBuy</title>
+</head>
+<body>
+<h1>Игры</h1>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Игра</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Продавец</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product : ${productsList}">
+        <td data-th-text="${product.title}"></td>
+        <td data-th-text="${product.price}"></td>
+        <td data-th-text="${product.vendor.name}">
+            <!--<a data-th-href="@{'/vendors/'+${product.vendor.id}}"><div data-th-text="${product.vendor.name}"></div></a>-->
+        </td>
+        <td>
+            <a data-th-href="@{'/products/'+${product.id}}">Подробнее</a>
+        </td>
+        <td>
+            <form data-sec-authorize="hasAuthority('USER')" data-th-action="@{/products/addToFavourites}" method="post">
+                <input id="productId" name="productId" hidden data-th-value="${product.id}">
+                <input type="submit" value="Добавить в избранное"/>
+            </form>
+        </td>
+        <td>
+            <form data-sec-authorize="hasAuthority('USER')" data-th-action="@{/products/remove}" method="post">
+                <input id="id" name="id" hidden data-th-value="${product.id}">
+                <input type="submit" value="Удалить игру"/>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<hr>
+<h3>Добавить игру</h3>
+<form data-sec-authorize="hasAuthority('USER')" data-th-action="@{/products/add}" method="post">
+    Название игры: <input type="text" name="title"/><br>
+    Описание игры: <input type="text" name="description"/><br>
+    Цена игры: <input type="text" name="price"/><br>
+    Продавец: <select name="vendorId" id="vendorId"><option data-th-each="vendor : ${vendorsList}" data-th-text="${vendor.name}" data-th-value="${vendor.id}"></option></select><br>
+    <input type="submit" value="Добавить игру"/>
+</form>
+<hr>
+<button onclick="location.href='/'">Назад</button>
+</body>
+</html>

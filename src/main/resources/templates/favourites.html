@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GameBuy</title>
+</head>
+<body>
+<h1>Избранные игры</h1>
+<hr>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Игра</th>
+        <th scope="col">Цена</th>
+        <th scope="col">Продавец</th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr data-th-each="product : ${user.favoriteProducts}">
+        <td data-th-text="${product.title}"></td>
+        <td data-th-text="${product.price}"></td>
+        <td data-th-text="${product.vendor.name}">
+            <!--<a data-th-href="@{'/vendors/'+${product.vendor.id}}"><div data-th-text="${product.vendor.name}"></div></a>-->
+        </td>
+        <td>
+            <a data-th-href="@{'/products/'+${product.id}}">Подробнее</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
